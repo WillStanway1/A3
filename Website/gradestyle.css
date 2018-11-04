@@ -1,0 +1,176 @@
+
+/* this section of code is utilised to determine where the initial window is located.*/
+#window {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: -1200px;
+  overflow: hidden;
+}
+
+/*This code is used to style the button elements on the page*/
+button{
+  background-color: #38ACEC;
+  color: white;
+  font-size: 20px;
+  font-family: Arial;
+  padding: 5px;
+  cursor: pointer;
+  letter-spacing: 0.5pt;
+  box-shadow: 2px 2px 2px 2px black;
+  border-radius: 10px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px 1px black;
+}
+
+/*This code is used to set the background image for the website*/
+#content {
+  background: url('../images/Content.png') top left no-repeat;
+  background-size: 100% 100%;
+  width: 3500px;
+  height: 1800px;
+  position: absolute;
+  left: 0;
+  top: 200px;
+  transition: all 2s ease;
+}
+
+/*This code is used to change the style of the text elements on the page*/
+.text{
+  font-family: Arial;
+  font-size: 20px;
+  color: white;
+  text-align: justify;
+  width: 400px;
+  height: 200px;
+  padding:10px;
+  background-color: #38ACEC;
+}
+
+/*The next few lines of code are responsible for managing the various scenes and where elements are located within them.*/
+#content.scene0 {
+  left: -400px;
+  top: 1000px;
+}
+
+#video{
+  display: inline-block;
+  text-align: center;
+  bottom:-1200px;
+  left:-100px;
+  font-family: Arial;
+  color: white;
+  width:560px;
+  height: 420px;
+  background-color: #38ACEC;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 1px
+}
+
+#content.scene1 {
+  left: -200px;
+  top: 1000px;
+}
+
+#Takeoff{
+  position: relative;
+  top: -600px;
+  left: 50px;
+}
+
+#content.scene2 {
+  left: -300px;
+  top: 1160px;
+}
+
+#lift{
+  position: relative;
+  bottom: -300px;
+}
+
+#Planelift{
+  position: relative;
+  top: -750px;
+  left:200px;
+}
+
+#content.scene3 {
+  left: 0px;
+  top: 1000px;
+}
+
+#Planedrag{
+  position: relative;
+  left: 0px;
+  top: -700px;
+}
+
+#content.scene4 {
+  left: -900px;
+  top: 1000px;
+}
+
+#Planeacceleration{
+  position: relative;
+  left: -100px;
+  top:-700px;
+}
+
+#content.scene5 {
+  left: -300px;
+  top: 1160px;
+}
+
+.controls {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  z-index: 2;
+}
+
+.scene-info {
+  position: fixed;
+/*   background: red; */
+/*   opacity: 0.5; */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 1;
+  padding: 10%;
+  display: none;
+}
+
+/* QUIZ*/
+#quiztitle{
+  font-family: Arial;
+  color: white;
+}
+
+#Question{
+  font-family: Arial;
+  color: white;
+  width: 500px;
+  height: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+  background-color:#38ACEC;
+}
+
+/*This section is responsible for customizing the appearence of the 'next, previous and start over' buttons.*/
+.button{
+  display: inline-block;
+  background-color: #38ACEC;
+  color: white;
+  font-size: 20px;
+  font-family: Arial;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 2px 2px black;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px 1px black;
+  border-radius: 10px;
+}

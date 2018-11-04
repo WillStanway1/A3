@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Assignment One</title>
+    <link href="gradestyle.css" rel="stylesheet" type="text/css">
+</head>
+<audio loop="loop" autoplay="autoplay">
+    <source src="http://www.orangefreesounds.com/wp-content/uploads/2017/09/Free-bluegrass-music.mp3" type="audio/mpeg" />
+</audio>
+<body>
+  <div class="controls">
+    <button class="scene-change" data-scene="scene0">INTRO TO PLANES</button>
+    <button class="scene-change" data-scene="scene1">TAKE OFF</button>
+    <button class="scene-change" data-scene="scene2">LIFT</button>
+    <button class="scene-change" data-scene="scene3">DRAG</button>
+    <button class="scene-change" data-scene="scene4">ACCELERATION</button>
+    <button class="scene-change" data-scene="scene5">FINAL QUIZ</button>
+  </div>
+
+  <div id="window">
+    <div id="content"></div>
+
+  <div class="scene-info" id="scene0-info">
+    <div id="video">
+      <h1>Get Ready To Learn!</h1>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/RriKI7u72Xs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+            <br>
+
+  <div class="scene-info" id="scene1-info">
+    <div id="takeoff" class="text">
+      <h1>Take Off</h1>
+      <p>Take off is the proccess in which the plane moves from the ground into the air. This requires the plane to accelerate quickly before launching off the ground.</p>
+    </div>
+    <div id="Takeoff">
+      <img src="../images/Plane.png" alt=planelift>
+    </div>
+  </div>
+
+            <br>
+
+  <div class="scene-info" id="scene2-info">
+    <div id="lift" class="text">
+      <h1>Lift</h1>
+      <p>Lift occurs when the air pressure is greater underneath the aircrafts wing than above it. This pressure causes the plane to lift up higher. Lift has the opposite effect of gravity.</p>
+    </div>
+    <div id="Planelift">
+      <img src="../images/Planelift.png" alt="planelift">
+    </div>
+  </div>
+
+            <br>
+
+  <div class="scene-info" id="scene3-info">
+    <div id="Drag" class="text">
+      <h1>Drag</h1>
+      <p>Drag occurs as the plane moves through the air. Air particles come into contact with the front of the aircraft, slowing it down due to the resistance created.</p>
+    </div>
+    <div id="Planedrag">
+      <img src="../images/Planedrag.png" alt="planedrag">
+    </div>
+  </div>
+
+            <br>
+
+  <div class="scene-info" id="scene4-info">
+      <div id="acceleration" class="text">
+      <h1>Acceleration</h1>
+      <p>Acceleration has the opposite affect of drag. This is achieved through the increase of output from the plane engines, allowing the plane to speed up.</p>
+    </div>
+    <div id="Planeacceleration">
+      <img src="../images/Planeacceleration.png" alt="planeacceleration">
+    </div>
+  </div>
+
+            <br>
+
+
+  <div class="scene-info" id="scene5-info">
+    <div id = 'QuizPlace'>
+          <div id = 'QuizName'>
+            <h1 id="quiztitle">ITS TIME FOR YOUR FINAL TEST!</h1>
+          </div>
+           <br/>
+          <div id='Question'>
+          </div>
+          <div class='button' id='nextQuestion'><a href='#'>Next</a></div>
+      		<div class='button' id='previousQuestion'><a href='#'>Prev</a>
+      		</div>
+      		<div class='button' id='StartOverQuiz'> <a href='#'>Start Over</a>
+      		</div>
+      </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+
+    //This ection of the code is responsible for moviing the viewers screen around and displaying different elements
+    // and hiding others. This allows the viewport to transition smoothly between the different stages of the website.
+
+      $('.scene-change').on('click', function(){
+        var className = $(this).attr('data-scene');
+
+      //  This code moves the viewport.
+        $('#content').removeAttr('class').addClass(className);
+
+     // This code makes sure all the previous scenes are faded out.
+        $('.scene-info').fadeOut();
+     // This code makes sure the new information fades in smoothly.
+        $('#'+className+'-info').delay(2000).fadeIn();
+
+      });
+
+//QUIZ section
+//This section of the code is used to create the quiz to test the users end knowledge about what they have learned.
+
+//This line determines the questions that will be asked to the user, and outlines the possible answers, as well as
+//which is the correct answer which is reresented by the associated number.
+      (function() {
+      var questions = [{
+        question: 'What allows an aircraft to gain height?',
+        choices: ['Lift', 'Gravity', 'Drag'],
+        correctAnswer: 0
+      }, {
+        question: 'What causes a plane to speed up?',
+        choices: ['Long Wings', 'Air Particles','Acceleration'],
+        correctAnswer: 2
+      }, {
+        question: 'What is the force associated with slowing down?',
+        choices: ['Drag', 'Gravity', 'Lift'],
+        correctAnswer: 0
+      }, {
+        question: 'What is the Natural force that combats lift?',
+        choices: ['low air pressure', 'Gravity','acceleration'],
+        correctAnswer: 1
+      }];
+
+      var questionAnswerCounter = 0;
+      var answerSelection = [];
+      var quiz= $('#Question')
+
+      //This section of the code is responsible for making the 'Next' button clickable. If the user has not selected an answer,
+      //then an alert will pop up and ask the user to make a selection. Once the user has made a selection, the next button will
+      //become avaliable for them to click.
+
+      displayNext();
+      $('#nextQuestion').on('click', function (e) {
+        e.preventDefault();
+
+
+        if(quiz.is(':animated')) {
+          return false;
+        }
+        choose();
+
+//This section of the code Prompts the user if they have not selected an answer and attempted to move onto the next question.
+        if (isNaN(answerSelection[questionAnswerCounter])) {
+          alert('Please make a selection!');
+        } else {
+          questionAnswerCounter++;
+          displayNext();
+        }
+      });
+        $('#previousQuestion').on('click', function (e) {
+       e.preventDefault();
+
+        if(quiz.is(':animated')) {
+          return false;
+        }
+        choose();
+        questionAnswerCounter--;
+        displayNext();
+      });
+      $('#StartOverQuiz').on('click', function (e) {
+        e.preventDefault();
+
+        if(quiz.is(':animated')) {
+          return false;
+        }
+        questionAnswerCounter = 0;
+        answerSelection = [];
+        displayNext();
+        $('#StartOverQuiz').hide();
+      });
+
+
+       function createQuestionElement(index) {
+        var qElement = $('<div>', {
+          id: 'question'
+        });
+
+
+        var header = $('<h2>Question ' + (index + 1) + ':</h2>');
+        qElement.append(header);
+
+        var question = $('<p>').append(questions[index].question);
+        qElement.append(question);
+
+        var radioButtons = createRadios(index);
+        qElement.append(radioButtons);
+
+    	return qElement;
+
+      }
+
+      function createRadios(index) {
+        var radioList = $('<ul>');
+        var item;
+        var input = '';
+        for (var i = 0; i < questions[index].choices.length; i++) {
+          item = $('<li>');
+          input = '<input type="radio" name="answer" value=' + i + ' />';
+          input += questions[index].choices[i];
+          item.append(input);
+          radioList.append(item);
+        }
+        return radioList;
+      }
+
+
+      function choose() {
+        answerSelection[questionAnswerCounter] = +$('input[name="answer"]:checked').val();
+      }
+
+
+      function displayNext() {
+        quiz.fadeOut(function() {
+          $('#question').remove();
+
+          if(questionAnswerCounter < questions.length){
+            var nextQuestion = createQuestionElement(questionAnswerCounter);
+            quiz.append(nextQuestion).fadeIn();
+            if (!(isNaN(answerSelection[questionAnswerCounter]))) {
+              $('input[value='+answerSelection[questionAnswerCounter]+']').prop('checked', true);
+            }
+
+//This section of the code controls the previous button and determines when the user is
+//able to use this button. This is important to maintain a consistent flow within the quiz.
+            // Controls display of 'prev' button
+            if(questionAnswerCounter === 1){
+              $('#previousQuestion').show();
+            } else if(questionAnswerCounter === 0){
+
+              $('#previousQuestion').hide();
+              $('#nextQuestion').show();
+            }
+           }else {
+            var scoreElem = displayScore();
+            quiz.append(scoreElem).fadeIn();
+            $('#nextQuestion').hide();
+            $('#previousQuestion').hide();
+            $('#StartOverQuiz').show();
+          }
+        });
+      }
+
+
+      function displayScore() {
+        var score = $('<h3>',{id: 'question'});
+
+        var numCorrect = 0;
+        for (var i = 0; i < answerSelection.length; i++) {
+          if (answerSelection[i] === questions[i].correctAnswer) {
+            numCorrect++;
+          }
+        }
+
+    	 score.append('You got ' + numCorrect + ' questions out of ' +
+                     questions.length + ' right');
+
+        return score;
+      }
+    })();
+
+    });
+      </script>
+    </body>
